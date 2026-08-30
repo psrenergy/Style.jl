@@ -1,4 +1,4 @@
-module Tidy
+module Style 
 
 using JuliaFormatter
 

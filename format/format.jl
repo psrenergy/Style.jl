@@ -2,5 +2,5 @@ import Pkg
 Pkg.activate(dirname(@__DIR__))
 Pkg.instantiate()
 
-using Tidy
-Tidy.format(dirname(@__DIR__))
+using Style 
+Style .format(dirname(@__DIR__))

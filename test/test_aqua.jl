@@ -1,12 +1,12 @@
 module TestAqua
 
 using Aqua
-using Tidy
+using Style 
 using Test
 
 @testset "Aqua" begin
-    Aqua.test_ambiguities(Tidy, recursive = false)
-    Aqua.test_all(Tidy, ambiguities = false)
+    Aqua.test_ambiguities(Style , recursive = false)
+    Aqua.test_all(Style , ambiguities = false)
     return nothing
 end
 
