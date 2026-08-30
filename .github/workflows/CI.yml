@@ -1,49 +1,46 @@
 name: CI
 on:
   push:
-    branches:
-      - main
-    tags: ['*']
+    branches: [master]
   pull_request:
-  workflow_dispatch:
+    types: [opened, synchronize, reopened]
 concurrency:
   # Skip intermediate builds: always.
   # Cancel intermediate builds: only if it is a pull request build.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
 jobs:
   format:
     name: Format
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
     steps:
       - uses: actions/checkout@v7
-      - uses: julia-actions/setup-julia@v3
-        with:
-          version: '1.12'
+      - uses: psrenergy/setup-julia@v1
       - run: julia --project=format format/format.jl
-  test:
-    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }} - ${{ github.event_name }}
-    runs-on: ${{ matrix.os }}
+
+  test-linux:
+    name: Test Linux
+    runs-on: [self-hosted, linux]
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         version:
-          - '1.10'
-          - '1.11'
-          - '1.12'
-        os:
-          - ubuntu-latest
-          - windows-latest
-        arch:
-          - x64
+          - "1.10"
+          - "1.11"
+          - "1.12"
     steps:
       - uses: actions/checkout@v7
+      - uses: psrenergy/setup-git-token@v1
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - uses: julia-actions/setup-julia@v3
         with:
           version: ${{ matrix.version }}
-          arch: ${{ matrix.arch }}
       - uses: julia-actions/cache@v3
       - uses: julia-actions/julia-buildpkg@v1
+        with:
+          git_cli: true
       - uses: julia-actions/julia-runtest@v1
       - uses: julia-actions/julia-processcoverage@v1
       - uses: codecov/codecov-action@v7
