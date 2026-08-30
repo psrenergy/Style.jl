@@ -1,11 +1,6 @@
 import Pkg
+Pkg.activate(dirname(@__DIR__))
 Pkg.instantiate()
 
-using JuliaFormatter
-
-if format(dirname(@__DIR__))
-    exit(0)
-else
-    @error "Some files have not been formatted!"
-    exit(1)
-end
+using Tidy
+Tidy.format(dirname(@__DIR__))

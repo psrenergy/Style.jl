@@ -48,11 +48,11 @@ function format(path::String)
         # yas_style_nesting = false,
     )
 
-        if result
-    @info "All files have been formatted!"
-    exit(0)
-else
-    @error "Some files have not been formatted!"
-    exit(1)
-end
+    if result
+        @info "All files have been formatted!"
+        exit(0)
+    else
+        @error "Some files have not been formatted!"
+        exit(1)
+    end
 end
