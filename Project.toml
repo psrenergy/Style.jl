@@ -1,6 +1,5 @@
 name = "Tidy"
 uuid = "dd40c01a-6b55-4ace-b2f4-4b880f6e5019"
-authors = ["raphasampaio"]
 version = "0.1.0"
 
 [deps]

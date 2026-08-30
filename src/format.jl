@@ -1,5 +1,5 @@
 function format(path::String)
-    return JuliaFormatter.format(
+    result = JuliaFormatter.format(
         path,
         style = nothing;
         throw_on_error = false,
@@ -47,4 +47,12 @@ function format(path::String)
         whitespace_typedefs = true,
         # yas_style_nesting = false,
     )
+
+        if result
+    @info "All files have been formatted!"
+    exit(0)
+else
+    @error "Some files have not been formatted!"
+    exit(1)
+end
 end
