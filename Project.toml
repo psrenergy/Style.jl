@@ -1,12 +1,14 @@
 name = "Tidy"
 uuid = "dd40c01a-6b55-4ace-b2f4-4b880f6e5019"
-version = "0.1.0"
 authors = ["raphasampaio"]
+version = "0.1.0"
 
 [deps]
+JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
 
 [compat]
 Aqua = "0.8"
+JuliaFormatter = "2.13.0"
 Test = "1"
 julia = "1.10"
 
