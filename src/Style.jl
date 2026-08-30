@@ -1,4 +1,4 @@
-module Style 
+module Style
 
 using JuliaFormatter
 
